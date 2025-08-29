@@ -24,10 +24,12 @@ https://github.com/YiTongHu-SC/YitongUnityTool.git?path=Assets/Plugins/ExcelConv
 
 ### Usage
 
-1. In the Unity editor, select the `Tools/Excel Converter` menu item to open the conversion tool window
-2. Select the Excel file you want to convert
-3. Choose the target format (JSON/CSV/XML)
-4. Click the convert button to generate the file in the corresponding format
+1. In the Unity editor, select the `Tools/ExcelConverter` menu item to open the conversion tool window
+2. Select target format: `JSON/CSV/XML`
+3. Select output file encoding: `GB2312/UTF-8`
+4. Select the Excel file path to convert
+5. Select output file path
+6. Click the `Convert File` button to generate the file in corresponding format
 
 ### Excel File Format Requirements
 
@@ -35,14 +37,18 @@ https://github.com/YiTongHu-SC/YitongUnityTool.git?path=Assets/Plugins/ExcelConv
 - Data content starts from the second row
 - Supported data types: String, Number, Boolean
 
+Data example:
+
+| ID     | Character Name | Description  |
+|--------|----------------|--------------|
+| 100000 | Li Ergou       | Initial character 1 |
+| 100001 | Fei Laowu      | Initial character 2 |
+
 ### Features
 
 - Supports multiple output formats
-- Preserves original data types
-- Simple and easy-to-use graphical interface
-- Supports Unicode characters (including Chinese)
-- Automatically generates files that conform to Unity project structure
+- Automatically saves last converted file paths, no need to re-select paths
 
 ### Reference
 
-This project references [https://github.com/qinyuanpei/Excel2Unity.git](https://github.com/qinyuanpei/Excel2Unity.git)
+This project references [Excel2Unity](https://github.com/qinyuanpei/Excel2Unity.git)
