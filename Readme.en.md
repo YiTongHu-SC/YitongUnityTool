@@ -42,3 +42,7 @@ https://github.com/YiTongHu-SC/YitongUnityTool.git?path=Assets/Plugins/ExcelConv
 - Simple and easy-to-use graphical interface
 - Supports Unicode characters (including Chinese)
 - Automatically generates files that conform to Unity project structure
+
+### Reference
+
+This project references [https://github.com/qinyuanpei/Excel2Unity.git](https://github.com/qinyuanpei/Excel2Unity.git)

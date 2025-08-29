@@ -48,3 +48,7 @@ https://github.com/YiTongHu-SC/YitongUnityTool.git?path=Assets/Plugins/ExcelConv
 
 - 支持多种输出格式
 - 自动保存上次转换的文件路径，不需要重复选取路径
+
+### 参考项目
+
+本项目参考了 [Excel2Unity](https://github.com/qinyuanpei/Excel2Unity.git)
