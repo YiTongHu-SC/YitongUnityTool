@@ -1,6 +1,7 @@
 # YitongUnityTool
 
-[Chinese Version](Readme.md)
+[![Language: Chinese](https://img.shields.io/badge/Language-Chinese-green)](Readme.md)
+[![Language: English](https://img.shields.io/badge/Language-English-blue)](Readme.en.md)
 
 A collection of Unity tools designed to improve development efficiency.
 
