@@ -105,7 +105,7 @@ namespace HuYitong.ExcelConverter
         {
             GUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("Excel源文件路径:", GUILayout.Width(120));
-            EditorGUILayout.TextField(sourcePath, GUILayout.Width(200));
+            EditorGUILayout.TextField(sourcePath, GUILayout.ExpandHeight(false), GUILayout.ExpandWidth(true));
             if (GUILayout.Button("选择路径", GUILayout.Width(80)))
             {
                 string selectedPath = EditorUtility.OpenFolderPanel("选择Excel源文件路径", pathRoot, "");
@@ -121,7 +121,7 @@ namespace HuYitong.ExcelConverter
 
             GUILayout.BeginHorizontal();
             EditorGUILayout.LabelField("输出文件路径:", GUILayout.Width(120));
-            EditorGUILayout.TextField(outputPath, GUILayout.Width(200));
+            EditorGUILayout.TextField(outputPath, GUILayout.ExpandHeight(false), GUILayout.ExpandWidth(true));
             if (GUILayout.Button("选择路径", GUILayout.Width(80)))
             {
                 string selectedPath = EditorUtility.OpenFolderPanel("选择输出文件路径", pathRoot, "");
