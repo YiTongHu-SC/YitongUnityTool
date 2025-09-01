@@ -1,4 +1,7 @@
 #if UNITY_EDITOR
+
+// #define IS_DEBUG
+
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
@@ -74,7 +77,33 @@ namespace HuYitong.ExcelConverter
             LoadExcel();
             instance.Show();
         }
+#if IS_DEBUG
+        /// <summary>
+        /// 设置为中文界面
+        /// </summary>
+        [MenuItem("Plugins/ExcelTools - Test Chinese")]
+        static void ShowExcelToolsChinese()
+        {
+            Init();
+            //加载Excel文件
+            LoadExcel();
+            Localization.SetLanguage(Localization.Language.Chinese);
+            instance.Repaint();
+        }
 
+        /// <summary>
+        /// 设置为英文界面
+        /// </summary>
+        [MenuItem("Plugins/ExcelTools - Test English")]
+        static void ShowExcelToolsEnglish()
+        {
+            Init();
+            //加载Excel文件
+            LoadExcel();
+            Localization.SetLanguage(Localization.Language.English);
+            instance.Repaint();
+        }
+#endif
         void OnGUI()
         {
             DrawOptions();
@@ -88,12 +117,12 @@ namespace HuYitong.ExcelConverter
         private void DrawOptions()
         {
             GUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField(Localization.GetText("SelectFormatType"), GUILayout.Width(85));
+            EditorGUILayout.LabelField(Localization.GetText("SelectFormatType"), GUILayout.Width(130));
             indexOfFormat = EditorGUILayout.Popup(indexOfFormat, formatOption, GUILayout.Width(125));
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField(Localization.GetText("SelectEncodingType"), GUILayout.Width(85));
+            EditorGUILayout.LabelField(Localization.GetText("SelectEncodingType"), GUILayout.Width(130));
             indexOfEncoding = EditorGUILayout.Popup(indexOfEncoding, encodingOption, GUILayout.Width(125));
             GUILayout.EndHorizontal();
         }
@@ -104,7 +133,7 @@ namespace HuYitong.ExcelConverter
         private void DrawPaths()
         {
             GUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField(Localization.GetText("ExcelSourcePath"), GUILayout.Width(120));
+            EditorGUILayout.LabelField(Localization.GetText("ExcelSourcePath"), GUILayout.Width(130));
             EditorGUILayout.TextField(sourcePath, GUILayout.ExpandHeight(false), GUILayout.ExpandWidth(true));
             if (GUILayout.Button(Localization.GetText("SelectPath"), GUILayout.Width(80)))
             {
@@ -120,7 +149,7 @@ namespace HuYitong.ExcelConverter
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField(Localization.GetText("OutputPath"), GUILayout.Width(120));
+            EditorGUILayout.LabelField(Localization.GetText("OutputPath"), GUILayout.Width(130));
             EditorGUILayout.TextField(outputPath, GUILayout.ExpandHeight(false), GUILayout.ExpandWidth(true));
             if (GUILayout.Button(Localization.GetText("SelectPath"), GUILayout.Width(80)))
             {
@@ -259,7 +288,7 @@ namespace HuYitong.ExcelConverter
 
             // 加载保存的路径
             LoadPaths();
-            
+
             // 更新语言设置
             Localization.UpdateLanguage();
         }

@@ -35,8 +35,8 @@ namespace HuYitong.ExcelConverter
         // 英文文本
         private static Dictionary<string, string> englishTexts = new Dictionary<string, string>()
         {
-            {"SelectFormatType", "Please select format type:"},
-            {"SelectEncodingType", "Please select encoding type:"},
+            {"SelectFormatType", "Select Format:"},
+            {"SelectEncodingType", "Select Encoding:"},
             {"ExcelSourcePath", "Excel source path:"},
             {"OutputPath", "Output path:"},
             {"SelectPath", "Select path"},
@@ -67,6 +67,15 @@ namespace HuYitong.ExcelConverter
             {
                 currentLanguage = Language.English;
             }
+        }
+
+        /// <summary>
+        /// 强制设置语言（用于测试）
+        /// </summary>
+        /// <param name="language">要设置的语言</param>
+        public static void SetLanguage(Language language)
+        {
+            currentLanguage = language;
         }
 
         /// <summary>
