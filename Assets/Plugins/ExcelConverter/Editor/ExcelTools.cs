@@ -88,12 +88,12 @@ namespace HuYitong.ExcelConverter
         private void DrawOptions()
         {
             GUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField("请选择格式类型:", GUILayout.Width(85));
+            EditorGUILayout.LabelField(Localization.GetText("SelectFormatType"), GUILayout.Width(85));
             indexOfFormat = EditorGUILayout.Popup(indexOfFormat, formatOption, GUILayout.Width(125));
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField("请选择编码类型:", GUILayout.Width(85));
+            EditorGUILayout.LabelField(Localization.GetText("SelectEncodingType"), GUILayout.Width(85));
             indexOfEncoding = EditorGUILayout.Popup(indexOfEncoding, encodingOption, GUILayout.Width(125));
             GUILayout.EndHorizontal();
         }
@@ -104,11 +104,11 @@ namespace HuYitong.ExcelConverter
         private void DrawPaths()
         {
             GUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField("Excel源文件路径:", GUILayout.Width(120));
+            EditorGUILayout.LabelField(Localization.GetText("ExcelSourcePath"), GUILayout.Width(120));
             EditorGUILayout.TextField(sourcePath, GUILayout.ExpandHeight(false), GUILayout.ExpandWidth(true));
-            if (GUILayout.Button("选择路径", GUILayout.Width(80)))
+            if (GUILayout.Button(Localization.GetText("SelectPath"), GUILayout.Width(80)))
             {
-                string selectedPath = EditorUtility.OpenFolderPanel("选择Excel源文件路径", pathRoot, "");
+                string selectedPath = EditorUtility.OpenFolderPanel(Localization.GetText("SelectPath"), pathRoot, "");
                 if (!string.IsNullOrEmpty(selectedPath))
                 {
                     sourcePath = selectedPath;
@@ -120,11 +120,11 @@ namespace HuYitong.ExcelConverter
             GUILayout.EndHorizontal();
 
             GUILayout.BeginHorizontal();
-            EditorGUILayout.LabelField("输出文件路径:", GUILayout.Width(120));
+            EditorGUILayout.LabelField(Localization.GetText("OutputPath"), GUILayout.Width(120));
             EditorGUILayout.TextField(outputPath, GUILayout.ExpandHeight(false), GUILayout.ExpandWidth(true));
-            if (GUILayout.Button("选择路径", GUILayout.Width(80)))
+            if (GUILayout.Button(Localization.GetText("SelectPath"), GUILayout.Width(80)))
             {
-                string selectedPath = EditorUtility.OpenFolderPanel("选择输出文件路径", pathRoot, "");
+                string selectedPath = EditorUtility.OpenFolderPanel(Localization.GetText("SelectPath"), pathRoot, "");
                 if (!string.IsNullOrEmpty(selectedPath))
                 {
                     outputPath = selectedPath;
@@ -144,7 +144,7 @@ namespace HuYitong.ExcelConverter
         private void DrawExport()
         {
             //输出
-            if (GUILayout.Button("转换文件"))
+            if (GUILayout.Button(Localization.GetText("ConvertFiles")))
             {
                 ConvertFiles();
             }
@@ -160,7 +160,7 @@ namespace HuYitong.ExcelConverter
             {
                 if (string.IsNullOrEmpty(sourcePath))
                 {
-                    Debug.LogWarning("未指定源文件路径，请指定源文件路径！");
+                    Debug.LogWarning(Localization.GetText("NoSourcePath"));
                     return;
                 }
 
@@ -170,7 +170,7 @@ namespace HuYitong.ExcelConverter
 
             if (excelList.Count == 0)
             {
-                Debug.LogWarning("没有找到可转换的Excel文件，请检查源文件路径是否正确！");
+                Debug.LogWarning(Localization.GetText("NoExcelFiles"));
                 return;
             }
 
@@ -216,7 +216,7 @@ namespace HuYitong.ExcelConverter
                     excel.ConvertToXml(output);
                 }
 
-                Debug.Log("已转换: " + output);
+                Debug.Log(Localization.GetText("Converted") + output);
             }
 
             //刷新本地资源
@@ -259,6 +259,9 @@ namespace HuYitong.ExcelConverter
 
             // 加载保存的路径
             LoadPaths();
+            
+            // 更新语言设置
+            Localization.UpdateLanguage();
         }
 
         /// <summary>
