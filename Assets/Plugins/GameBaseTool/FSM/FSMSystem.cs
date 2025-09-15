@@ -5,40 +5,36 @@ using UnityEngine;
 namespace HuYitong.GameBaseTool.FSM
 {
     /// <summary>
-    /// 状态机实现
+    ///     状态机实现
     /// </summary>
-    /// /// <author> HuYiTong</author>
+    /// ///
+    /// <author> HuYiTong</author>
     /// <team>MatrixPlay</team>
     public class StateMachine<T, TE, TT>
         where T : MonoBehaviour
         where TE : Enum
         where TT : Enum
     {
-        private readonly Dictionary<TE, FsmState<T, TE, TT>> _statesTable = new Dictionary<TE, FsmState<T, TE, TT>>();
-        private TE _currentStateID;
-        private FsmState<T, TE, TT> _currentState;
-        public TE CurrentStateID => _currentStateID;
-        public FsmState<T, TE, TT> CurrentState => _currentState;
+        private readonly Dictionary<TE, FsmState<T, TE, TT>> _statesTable = new();
 
-        private T _context;
+        private readonly T _context;
 
         public StateMachine(T context)
         {
             _context = context;
         }
 
+        public TE CurrentStateID { get; private set; }
+
+        public FsmState<T, TE, TT> CurrentState { get; private set; }
+
         public void AddState(FsmState<T, TE, TT> state)
         {
-            if (state == null)
-            {
-                Debug.LogError("FSM ERROR: Null reference is not allowed");
-            }
+            if (state == null) Debug.LogError("FSM ERROR: Null reference is not allowed");
 
             if (_statesTable.ContainsKey(state.Id))
-            {
-                Debug.LogError("FSM ERROR: Impossible to add state " + state.Id.ToString() +
+                Debug.LogError("FSM ERROR: Impossible to add state " + state.Id +
                                " because state has already been added");
-            }
 
             state.Context = _context;
             _statesTable.Add(state.Id, state);
@@ -47,31 +43,24 @@ namespace HuYitong.GameBaseTool.FSM
         public void DeleteState(TE id)
         {
             if (_statesTable.ContainsKey(id))
-            {
                 _statesTable.Remove(id);
-            }
             else
-            {
-                Debug.LogError("FSM ERROR: Impossible to delete state " + id.ToString() +
+                Debug.LogError("FSM ERROR: Impossible to delete state " + id +
                                ". It was not on the dict of states");
-            }
         }
 
         public void PerformTransition(TT trans)
         {
-            if (_currentState == null)
+            if (CurrentState == null)
             {
                 Debug.LogError("FSM ERROR: No current state set");
                 return;
             }
 
-            if (!_currentState.Contains(trans))
-            {
-                return;
-            }
+            if (!CurrentState.Contains(trans)) return;
 
-            _currentState.Exit();
-            TE nextStateId = _currentState.GetTargetState(trans);
+            CurrentState.Exit();
+            var nextStateId = CurrentState.GetTargetState(trans);
 
             if (!_statesTable.ContainsKey(nextStateId))
             {
@@ -80,8 +69,8 @@ namespace HuYitong.GameBaseTool.FSM
             }
 
             var nextState = _statesTable[nextStateId];
-            _currentStateID = nextStateId;
-            _currentState = nextState;
+            CurrentStateID = nextStateId;
+            CurrentState = nextState;
             nextState.Enter();
         }
 
@@ -93,22 +82,22 @@ namespace HuYitong.GameBaseTool.FSM
                 return;
             }
 
-            _currentState?.Exit(); // 退出当前状态
-            _currentStateID = id;
-            _currentState = _statesTable[id];
-            _currentState.Enter();
+            CurrentState?.Exit(); // 退出当前状态
+            CurrentStateID = id;
+            CurrentState = _statesTable[id];
+            CurrentState.Enter();
         }
 
         public void Tick(float deltaTime = 0)
         {
-            if (_currentState == null)
+            if (CurrentState == null)
             {
                 Debug.LogWarning("FSM WARNING: No current state to tick");
                 return;
             }
 
-            _currentState.Reason(deltaTime);
-            _currentState.Act(deltaTime);
+            CurrentState.Reason(deltaTime);
+            CurrentState.Act(deltaTime);
         }
 
         public bool IsValidState(TE id)
@@ -118,7 +107,7 @@ namespace HuYitong.GameBaseTool.FSM
 
         public bool HasCurrentState()
         {
-            return _currentState != null;
+            return CurrentState != null;
         }
     }
 
@@ -127,17 +116,16 @@ namespace HuYitong.GameBaseTool.FSM
         where TE : Enum
         where TT : Enum
     {
-        private readonly TE _stateId;
-        protected Dictionary<TT, TE> Map = new Dictionary<TT, TE>();
-
-        public T Context { get; set; }
+        protected Dictionary<TT, TE> Map = new();
 
         protected FsmState(TE stateId)
         {
-            _stateId = stateId;
+            Id = stateId;
         }
 
-        public TE Id => _stateId;
+        public T Context { get; set; }
+
+        public TE Id { get; }
 
         public void AddTransition(TT trans, TE id)
         {
@@ -145,8 +133,8 @@ namespace HuYitong.GameBaseTool.FSM
             //   check if the current transition was already inside the map
             if (Map.ContainsKey(trans))
             {
-                Debug.LogError("FSMState ERROR: State " + _stateId.ToString() + " already has transition " +
-                               trans.ToString() +
+                Debug.LogError("FSMState ERROR: State " + Id + " already has transition " +
+                               trans +
                                "Impossible to assign to another state");
                 return;
             }
@@ -163,16 +151,14 @@ namespace HuYitong.GameBaseTool.FSM
                 return;
             }
 
-            Debug.LogError("FSMState ERROR: Transition " + trans.ToString() + " passed to " + _stateId.ToString() +
+            Debug.LogError("FSMState ERROR: Transition " + trans + " passed to " + Id +
                            " was not on the state's transition list");
         }
 
         public TE GetTargetState(TT trans)
         {
             if (!Map.ContainsKey(trans))
-            {
-                Debug.LogError("FSMState ERROR : Transition DO NOT exist : Transition " + trans.ToString());
-            }
+                Debug.LogError("FSMState ERROR : Transition DO NOT exist : Transition " + trans);
 
             return Map[trans];
         }

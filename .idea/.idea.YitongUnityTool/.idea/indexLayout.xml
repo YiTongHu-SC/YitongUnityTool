@@ -3,6 +3,7 @@
   <component name="UserContentModel">
     <attachedFolders />
     <explicitIncludes>
+      <Path>Assets/Scripts/GameTest</Path>
       <Path>Assets/Scripts/LoadGame.cs</Path>
     </explicitIncludes>
     <explicitExcludes />
