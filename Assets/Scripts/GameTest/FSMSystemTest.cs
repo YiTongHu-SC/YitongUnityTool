@@ -1,6 +1,6 @@
 using UnityEngine;
 using System.Collections;
-using HuYitong.GameBaseTool.FSM;
+using GameBaseTool.FSM;
 
 namespace HuYitong.GameBaseTool.FSM.Test
 {
