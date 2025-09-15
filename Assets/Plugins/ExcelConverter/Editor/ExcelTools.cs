@@ -8,7 +8,7 @@ using System.Text;
 using UnityEditor;
 using UnityEngine;
 
-namespace HuYitong.ExcelConverter
+namespace ExcelConverter
 {
     public class ExcelTools : EditorWindow
     {

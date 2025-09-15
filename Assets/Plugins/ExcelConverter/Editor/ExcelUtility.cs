@@ -6,7 +6,7 @@ using System.Text;
 using Excel;
 using Newtonsoft.Json;
 
-namespace HuYitong.ExcelConverter
+namespace ExcelConverter
 {
     public class ExcelUtility
     {

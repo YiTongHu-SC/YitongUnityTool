@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Threading;
 
-namespace HuYitong.ExcelConverter
+namespace ExcelConverter
 {
     /// <summary>
     ///     本地化系统，用于根据Unity编辑器语言设置显示相应语言的界面

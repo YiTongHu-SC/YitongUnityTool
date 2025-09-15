@@ -1,11 +1,11 @@
 {
-  "name": "com.huyitong.excelconverter",
-  "version": "1.1.0",
-  "displayName": "ExcelConverter",
+  "name": "com.yitong.excelconverter",
+  "version": "1.1.1",
+  "displayName": "Excel Converter",
   "description": "Convert Excel files to json or other format",
   "unity": "2022.3",
   "author": {
-    "name": "Hu Yitong",
+    "name": "YiTong Hu",
     "email": "cqu.hubinbin@gmail.com",
     "url": "https://github.com/YiTongHu-SC"
   },

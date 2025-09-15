@@ -13,7 +13,7 @@ Excel文件格式转换工具，支持将Excel文件转换为多种常用数据�
 在Unity Package Manager中选择`Add package from git URL`，并使用下面的路径：
 
 ```
-https://github.com/YiTongHu-SC/YitongUnityTool.git?path=Assets/Plugins/ExcelConverter
+https://github.com/YiTongHu-SC/ExcelConverter.git
 ```
 
 ### 使用说明
