@@ -19,7 +19,7 @@
 Thumbs.db
 
 # 编译输出
-*.dll
+#*.dll
 *.pdb
 *.mdb
 
