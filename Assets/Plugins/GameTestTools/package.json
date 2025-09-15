@@ -1,0 +1,13 @@
+{
+  "name": "com.huyitong.game_test_tools",
+  "version": "1.1.0",
+  "displayName": "GameTestTools",
+  "description": "a game tools for test game",
+  "unity": "2022.3",
+  "author": {
+    "name": "Hu Yitong",
+    "email": "cqu.hubinbin@gmail.com",
+    "url": "https://github.com/YiTongHu-SC"
+  },
+  "dependencies": {}
+}
