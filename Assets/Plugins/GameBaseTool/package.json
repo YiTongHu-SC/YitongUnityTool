@@ -1,6 +1,6 @@
 {
-  "name": "com.huyitong.game_base_tool",
-  "version": "1.1.0",
+  "name": "com.huyitong.gamebasetool",
+  "version": "1.1.1",
   "displayName": "GameBaseTools",
   "description": "game base tools",
   "unity": "2022.3",

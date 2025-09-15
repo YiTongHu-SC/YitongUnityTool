@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Plugins.GameBaseTool.Base
+namespace HuYitong.GameBaseTool.Base
 {
     public abstract class SingletonScriptableObject<T> : ScriptableObject where T : SingletonScriptableObject<T>
     {
