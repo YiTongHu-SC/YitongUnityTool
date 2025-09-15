@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace HuYitong.GameBaseTool.FSM
+namespace GameBaseTool.FSM
 {
     /// <summary>
     ///     状态机实现

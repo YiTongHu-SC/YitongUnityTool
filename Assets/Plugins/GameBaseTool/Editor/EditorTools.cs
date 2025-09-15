@@ -1,16 +1,17 @@
 using System.IO;
 using UnityEditor;
 using UnityEditor.SceneManagement;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace HuYitong.GameTestTools
+namespace GameBaseTool
 {
     [InitializeOnLoad]
-    public class RunGameEditor : Editor
+    public class EditorTools
     {
         private const string PrevSceneKey = "TestRunGame_PrevScenePath";
 
-        static RunGameEditor()
+        static EditorTools()
         {
             EditorApplication.playModeStateChanged += OnPlayModeStateChanged;
         }

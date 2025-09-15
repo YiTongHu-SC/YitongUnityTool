@@ -2,6 +2,8 @@
 <project version="4">
   <component name="VcsDirectoryMappings">
     <mapping directory="$PROJECT_DIR$" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Assets/Plugins/ExcelConverter" vcs="Git" />
     <mapping directory="$PROJECT_DIR$/Assets/Plugins/GameBaseTool" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/Assets/Plugins/GameTestTools" vcs="Git" />
   </component>
 </project>

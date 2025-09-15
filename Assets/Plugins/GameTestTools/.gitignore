@@ -1,0 +1,33 @@
+# Unity 包通用忽略规则
+[Tt]emp/
+[Oo]bj/
+[Bb]uild/
+[Bb]uilds/
+[Ll]ogs/
+[Uu]ser[Ss]ettings/
+
+# IDE 文件
+.vs/
+.vscode/
+.idea/
+*.sln
+*.csproj
+*.userprefs
+
+# OS 文件
+.DS_Store
+Thumbs.db
+
+# 编译输出
+*.dll
+*.pdb
+*.mdb
+
+# 包管理器特定文件
+packages-lock.json
+
+# 测试相关
+TestResults/
+
+# 文档生成
+docs/_site/
