@@ -13,52 +13,52 @@ namespace HuYitong.ExcelConverter
     public class ExcelTools : EditorWindow
     {
         /// <summary>
-        /// 当前编辑器窗口实例
+        ///     当前编辑器窗口实例
         /// </summary>
         private static ExcelTools instance;
 
         /// <summary>
-        /// Excel文件列表
+        ///     Excel文件列表
         /// </summary>
         private static List<string> excelList;
 
         /// <summary>
-        /// 项目根路径	
+        ///     项目根路径
         /// </summary>
         private static string pathRoot;
 
         /// <summary>
-        /// 滚动窗口初始位置
+        ///     滚动窗口初始位置
         /// </summary>
         private static Vector2 scrollPos;
 
         /// <summary>
-        /// 输出格式索引
+        ///     输出格式索引
         /// </summary>
-        private static int indexOfFormat = 0;
+        private static int indexOfFormat;
 
         /// <summary>
-        /// 输出格式
+        ///     输出格式
         /// </summary>
-        private static string[] formatOption = new string[] { "JSON", "CSV", "XML" };
+        private static readonly string[] formatOption = { "JSON", "CSV", "XML" };
 
         /// <summary>
-        /// 编码索引
+        ///     编码索引
         /// </summary>
-        private static int indexOfEncoding = 0;
+        private static int indexOfEncoding;
 
         /// <summary>
-        /// 编码选项
+        ///     编码选项
         /// </summary>
-        private static string[] encodingOption = new string[] { "UTF-8", "GB2312" };
+        private static readonly string[] encodingOption = { "UTF-8", "GB2312" };
 
         /// <summary>
-        /// Excel源文件路径
+        ///     Excel源文件路径
         /// </summary>
         private static string sourcePath = "";
 
         /// <summary>
-        /// 输出文件路径
+        ///     输出文件路径
         /// </summary>
         private static string outputPath = "";
 
@@ -67,10 +67,10 @@ namespace HuYitong.ExcelConverter
         private const string OUTPUT_PATH_PREF_KEY = "ExcelTools_OutputPath";
 
         /// <summary>
-        /// 显示当前窗口	
+        ///     显示当前窗口
         /// </summary>
         [MenuItem("Plugins/ExcelTools")]
-        static void ShowExcelTools()
+        private static void ShowExcelTools()
         {
             Init();
             //加载Excel文件
@@ -104,7 +104,7 @@ namespace HuYitong.ExcelConverter
             instance.Repaint();
         }
 #endif
-        void OnGUI()
+        private void OnGUI()
         {
             DrawOptions();
             DrawPaths();
@@ -112,7 +112,7 @@ namespace HuYitong.ExcelConverter
         }
 
         /// <summary>
-        /// 绘制插件界面配置项
+        ///     绘制插件界面配置项
         /// </summary>
         private void DrawOptions()
         {
@@ -128,7 +128,7 @@ namespace HuYitong.ExcelConverter
         }
 
         /// <summary>
-        /// 绘制路径选择项
+        ///     绘制路径选择项
         /// </summary>
         private void DrawPaths()
         {
@@ -137,7 +137,7 @@ namespace HuYitong.ExcelConverter
             EditorGUILayout.TextField(sourcePath, GUILayout.ExpandHeight(false), GUILayout.ExpandWidth(true));
             if (GUILayout.Button(Localization.GetText("SelectPath"), GUILayout.Width(80)))
             {
-                string selectedPath = EditorUtility.OpenFolderPanel(Localization.GetText("SelectPath"), pathRoot, "");
+                var selectedPath = EditorUtility.OpenFolderPanel(Localization.GetText("SelectPath"), pathRoot, "");
                 if (!string.IsNullOrEmpty(selectedPath))
                 {
                     sourcePath = selectedPath;
@@ -153,7 +153,7 @@ namespace HuYitong.ExcelConverter
             EditorGUILayout.TextField(outputPath, GUILayout.ExpandHeight(false), GUILayout.ExpandWidth(true));
             if (GUILayout.Button(Localization.GetText("SelectPath"), GUILayout.Width(80)))
             {
-                string selectedPath = EditorUtility.OpenFolderPanel(Localization.GetText("SelectPath"), pathRoot, "");
+                var selectedPath = EditorUtility.OpenFolderPanel(Localization.GetText("SelectPath"), pathRoot, "");
                 if (!string.IsNullOrEmpty(selectedPath))
                 {
                     outputPath = selectedPath;
@@ -168,19 +168,16 @@ namespace HuYitong.ExcelConverter
         }
 
         /// <summary>
-        /// 绘制插件界面输出项
+        ///     绘制插件界面输出项
         /// </summary>
         private void DrawExport()
         {
             //输出
-            if (GUILayout.Button(Localization.GetText("ConvertFiles")))
-            {
-                ConvertFiles();
-            }
+            if (GUILayout.Button(Localization.GetText("ConvertFiles"))) ConvertFiles();
         }
 
         /// <summary>
-        /// 转换Excel文件
+        ///     转换Excel文件
         /// </summary>
         private static void ConvertFiles()
         {
@@ -203,32 +200,27 @@ namespace HuYitong.ExcelConverter
                 return;
             }
 
-            foreach (string assetsPath in excelList)
+            foreach (var assetsPath in excelList)
             {
                 //获取Excel文件的绝对路径
-                string excelPath = assetsPath;
+                var excelPath = assetsPath;
 
                 // 如果指定了输出路径，则使用指定的输出路径
-                string outputDirectory =
+                var outputDirectory =
                     string.IsNullOrEmpty(outputPath) ? Path.GetDirectoryName(excelPath) : outputPath;
-                string fileName = Path.GetFileNameWithoutExtension(excelPath);
+                var fileName = Path.GetFileNameWithoutExtension(excelPath);
 
                 //构造Excel工具类
-                ExcelUtility excel = new ExcelUtility(excelPath);
+                var excel = new ExcelUtility(excelPath);
 
                 //判断编码类型
                 Encoding encoding = null;
                 if (indexOfEncoding == 0)
-                {
                     encoding = Encoding.GetEncoding("utf-8");
-                }
-                else if (indexOfEncoding == 1)
-                {
-                    encoding = Encoding.GetEncoding("gb2312");
-                }
+                else if (indexOfEncoding == 1) encoding = Encoding.GetEncoding("gb2312");
 
                 //判断输出类型
-                string output = "";
+                var output = "";
                 if (indexOfFormat == 0)
                 {
                     output = Path.Combine(outputDirectory, fileName + ".json");
@@ -253,7 +245,7 @@ namespace HuYitong.ExcelConverter
         }
 
         /// <summary>
-        /// 从指定路径加载Excel文件
+        ///     从指定路径加载Excel文件
         /// </summary>
         private static void LoadExcelFromPath()
         {
@@ -262,17 +254,15 @@ namespace HuYitong.ExcelConverter
 
             if (!string.IsNullOrEmpty(sourcePath) && Directory.Exists(sourcePath))
             {
-                string[] files = Directory.GetFiles(sourcePath, "*.xlsx");
-                foreach (string file in files)
-                {
+                var files = Directory.GetFiles(sourcePath, "*.xlsx");
+                foreach (var file in files)
                     // string relativePath = file.Replace(pathRoot + "\\", "").Replace("\\", "/");
                     excelList.Add(file);
-                }
             }
         }
 
         /// <summary>
-        /// 加载Excel
+        ///     加载Excel
         /// </summary>
         private static void LoadExcel()
         {
@@ -282,7 +272,7 @@ namespace HuYitong.ExcelConverter
 
         private static void Init()
         {
-            instance = EditorWindow.GetWindow<ExcelTools>();
+            instance = GetWindow<ExcelTools>();
             pathRoot = Application.dataPath;
             scrollPos = new Vector2(instance.position.x, instance.position.y + 75);
 
@@ -294,7 +284,7 @@ namespace HuYitong.ExcelConverter
         }
 
         /// <summary>
-        /// 加载保存的路径
+        ///     加载保存的路径
         /// </summary>
         private static void LoadPaths()
         {
@@ -303,7 +293,7 @@ namespace HuYitong.ExcelConverter
         }
 
         /// <summary>
-        /// 保存路径
+        ///     保存路径
         /// </summary>
         private static void SavePaths()
         {
@@ -311,7 +301,7 @@ namespace HuYitong.ExcelConverter
             EditorPrefs.SetString(OUTPUT_PATH_PREF_KEY, outputPath);
         }
 
-        void OnSelectionChange()
+        private void OnSelectionChange()
         {
             //当选择发生变化时重绘窗体
             Show();
