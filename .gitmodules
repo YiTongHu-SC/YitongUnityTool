@@ -1,0 +1,3 @@
+[submodule "Assets/Plugins/GameBaseTool"]
+	path = Assets/Plugins/GameBaseTool
+	url = git@github.com:YiTongHu-SC/GameBaseTool.git
