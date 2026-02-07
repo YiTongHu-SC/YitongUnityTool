@@ -2,11 +2,7 @@
 <project version="4">
   <component name="UserContentModel">
     <attachedFolders />
-    <explicitIncludes>
-      <Path>Assets/Plugins/GameBaseTool/Editor</Path>
-      <Path>Assets/Scripts/GameTest</Path>
-      <Path>Assets/Scripts/LoadGame.cs</Path>
-    </explicitIncludes>
+    <explicitIncludes />
     <explicitExcludes />
   </component>
 </project>
