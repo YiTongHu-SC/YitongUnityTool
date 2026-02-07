@@ -1,10 +1,9 @@
 using System.IO;
 using UnityEditor;
 using UnityEditor.SceneManagement;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace GameBaseTool
+namespace StellarCore.EditorTools
 {
     [InitializeOnLoad]
     public class EditorTools

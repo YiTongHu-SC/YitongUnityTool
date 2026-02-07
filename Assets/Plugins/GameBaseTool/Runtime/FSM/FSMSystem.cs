@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace GameBaseTool.FSM
+namespace StellarCore.FSM
 {
     /// <summary>
     ///     状态机实现
